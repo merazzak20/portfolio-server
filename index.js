@@ -108,7 +108,6 @@ async function run() {
     app.get("/user/role/:email", async (req, res) => {
       const email = req.params.email;
       const result = await userCollection.findOne({ email });
-      console.log(result);
       res.send({ role: result?.role });
     });
 
@@ -162,8 +161,15 @@ async function run() {
       const result = await projectsCollection
         .find()
         .sort({ createdAt: -1 })
-        .limit(3)
+        // .limit(3)
         .toArray();
+      res.send(result);
+    });
+
+    app.get("/projects/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await projectsCollection.findOne(query);
       res.send(result);
     });
 
