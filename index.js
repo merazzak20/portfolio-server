@@ -84,6 +84,7 @@ async function run() {
     const userCollection = db.collection("users");
     const messageCollection = db.collection("messages");
     const feedbackCollection = db.collection("feedbacks");
+    const certificateCollection = db.collection("certificates");
 
     /**************************
      * Admin Related API
@@ -176,6 +177,15 @@ async function run() {
     app.post("/projects", async (req, res) => {
       const project = req.body;
       const result = await projectsCollection.insertOne(project);
+      res.send(result);
+    });
+
+    /**************************
+     * Certificate Related API
+     **************************/
+    app.post("/certificate", async (req, res) => {
+      const certificate = req.body;
+      const result = await certificateCollection.insertOne(certificate);
       res.send(result);
     });
 
