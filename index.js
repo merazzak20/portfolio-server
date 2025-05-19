@@ -134,6 +134,13 @@ async function run() {
       res.send(result);
     });
 
+    app.delete("/feedbacks/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await feedbackCollection.deleteOne(query);
+      res.send(result);
+    });
+
     /**************************
      * Message Related API
      **************************/
